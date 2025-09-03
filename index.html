@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音乐歌词播放器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 文件上传控件（隐藏） -->
+    <input type="file" id="musicFile" accept="audio/*" style="display: none;">
+    <input type="file" id="lyricsFile" accept=".lrc,.txt" style="display: none;">
+    <input type="file" id="coverFile" accept="image/*" style="display: none;">
+    
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 左侧：专辑封面 -->
+        <div class="left-section">
+            <div class="album-cover" id="albumCover">
+                <img id="coverImage" src="" alt="专辑封面" style="display: none;">
+                <div class="cover-placeholder">
+                    <div class="music-icon">♪</div>
+                </div>
+            </div>
+            <div class="song-title" id="songTitle">请选择音乐文件</div>
+        </div>
+        
+        <!-- 右侧：歌词信息 -->
+        <div class="right-section">
+            <!-- 歌词显示区域 -->
+            <div class="lyrics-container" id="lyricsContainer">
+                <!-- 歌词将在这里显示 -->
+            </div>
+        </div>
+        
+        <!-- 播放控制按钮（右上角） -->
+        <div class="play-button" id="playButton">
+            <svg class="play-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 5v14l11-7z"/>
+            </svg>
+            <svg class="pause-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+            </svg>
+        </div>
+        
+        <!-- 上传按钮 -->
+        <div class="upload-buttons">
+            <button class="upload-btn" onclick="document.getElementById('musicFile').click()">上传音乐</button>
+            <button class="upload-btn" onclick="document.getElementById('lyricsFile').click()">上传歌词</button>
+            <button class="upload-btn" onclick="document.getElementById('coverFile').click()">上传封面</button>
+            <button class="upload-btn reset-btn" id="resetBtn">重置全部</button>
+        </div>
+        
+        <!-- 歌词时间偏移调节 -->
+        <div class="offset-controls">
+            <label class="offset-label">歌词偏移: <span id="offsetValue">0.0</span>秒</label>
+            <div class="offset-buttons">
+                <button class="offset-btn" id="offsetDecrease">-0.5s</button>
+                <button class="offset-btn" id="offsetIncrease">+0.5s</button>
+                <button class="offset-btn" id="offsetReset">重置</button>
+            </div>
+        </div>
+        
+        <!-- 制作者信息 -->
+        <div class="creator-info">
+            <span>本程序由浮世制作</span>
+            <svg class="bilibili-icon" viewBox="0 0 24 24" width="16" height="16">
+                <path fill="#00AEEC" d="M17.813 4.653h.854c1.51.054 2.769.578 3.773 1.574 1.004.995 1.524 2.249 1.56 3.76v7.36c-.036 1.51-.556 2.769-1.56 3.773s-2.262 1.524-3.773 1.56H5.333c-1.51-.036-2.769-.556-3.773-1.56S.036 18.858 0 17.347v-7.36c.036-1.511.556-2.765 1.56-3.76 1.004-.996 2.262-1.52 3.773-1.574h.774l-1.174-1.12a1.234 1.234 0 0 1-.373-.906c0-.356.124-.658.373-.907l.027-.027c.267-.249.573-.373.92-.373.347 0 .653.124.92.373L9.653 4.44c.071.071.134.142.187.213h4.267a.836.836 0 0 1 .16-.213l2.853-2.747c.267-.249.573-.373.92-.373.347 0 .662.151.929.4.267.249.391.551.391.907 0 .356-.124.657-.373.906l-1.174 1.12zM6.4 15.558a1.25 1.25 0 0 0 .884.373c.355 0 .658-.124.907-.373.249-.249.373-.551.373-.907 0-.355-.124-.658-.373-.907a1.25 1.25 0 0 0-.907-.373c-.355 0-.658.124-.907.373-.249.249-.373.552-.373.907 0 .356.124.658.373.907zm8.8 0a1.25 1.25 0 0 0 .884.373c.355 0 .658-.124.907-.373.249-.249.373-.551.373-.907 0-.355-.124-.658-.373-.907a1.25 1.25 0 0 0-.907-.373c-.355 0-.658.124-.907.373-.249.249-.373.552-.373.907 0 .356.124.658.373.907z"/>
+            </svg>
+            <span>浮世f6sn_</span>
+        </div>
+    </div>
+    
+    <!-- 音频元素 -->
+    <audio id="audioPlayer" preload="metadata"></audio>
+    
+    <script src="script.js"></script>
+</body>
+</html>
